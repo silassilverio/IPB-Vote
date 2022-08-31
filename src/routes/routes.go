@@ -3,7 +3,7 @@ package routes
 import (
 	"net/http"
 
-	"github.com/silassilverio/IPB-Vote/src/controllers"
+	"github.com/ipbproject/IPB-Vote/src/controllers"
 )
 
 func HanleRequest() {

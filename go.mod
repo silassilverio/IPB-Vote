@@ -1,3 +1,3 @@
-module github.com/silassilverio/IPB-Vote
+module github.com/ipbproject/IPB-Vote
 
 go 1.13

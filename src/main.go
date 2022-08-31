@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/silassilverio/IPB-Vote/src/routes"
+	"github.com/ipbproject/IPB-Vote/src/routes"
 )
 
 func main() {
