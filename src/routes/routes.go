@@ -8,4 +8,5 @@ import (
 
 func HanleRequest() {
 	http.HandleFunc("/", controllers.Home)
+	http.HandleFunc("/insert", controllers.Insert)
 }
