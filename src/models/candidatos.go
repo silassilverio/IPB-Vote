@@ -1,22 +1,18 @@
 package models
 
 import (
-	"github.com/ipbproject/IPB-Vote/src/database"
+	"gopkg.in/validator.v2"
+	"gorm.io/gorm"
 )
 
-type Candidatos struct {
-	Id   int
-	Nome string
+type Candidato struct {
+	gorm.Model
+	Nome string `json:"nome" validate:"nonzero"`
 }
 
-func InsertNewCandidate(nome string) {
-	db := database.ConectToDatabase()
-
-	insertCandidate, err := db.Prepare("insert into candidatos (nome) values ($1)")
-	if err != nil {
-		panic(err.Error())
+func ValidaNomeDoCandidatos(candidato *Candidato) error {
+	if err := validator.Validate(candidato); err == nil {
+		return err
 	}
-
-	insertCandidate.Exec(nome)
-	defer db.Close()
+	return nil
 }

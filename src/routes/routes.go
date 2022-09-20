@@ -1,12 +1,12 @@
 package routes
 
 import (
-	"net/http"
-
+	"github.com/gin-gonic/gin"
 	"github.com/ipbproject/IPB-Vote/src/controllers"
 )
 
 func HanleRequest() {
-	http.HandleFunc("/", controllers.Home)
-	http.HandleFunc("/insert", controllers.Insert)
+	r := gin.Default()
+	r.POST("/insert", controllers.Insert)
+	r.Run()
 }
