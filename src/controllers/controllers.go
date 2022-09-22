@@ -1,23 +1,24 @@
 package controllers
 
 import (
-	"encoding/json"
-	"fmt"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
+	"github.com/ipbproject/IPB-Vote/src/database"
 	"github.com/ipbproject/IPB-Vote/src/models"
 )
 
-func Home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Home Page")
-}
-
-func Insert(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "POST" {
-		var candidato *models.Candidatos
-		json.NewDecoder(r.Body).Decode(&candidato)
-
-		models.InsertNewCandidate(candidato.Nome)
+func Insert(c *gin.Context) {
+	var candidato models.Candidato
+	if err := c.ShouldBindJSON(&candidato); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
+		return
 	}
-	http.Redirect(w, r, "/", http.StatusMovedPermanently)
+	if err := models.ValidaNomeDoCandidatos(&candidato); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
+	}
+	database.DB.Create(&candidato)
+	c.JSON(http.StatusOK, candidato)
 }

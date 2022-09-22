@@ -1,12 +1,11 @@
 package main
 
 import (
-	"net/http"
-
+	"github.com/ipbproject/IPB-Vote/src/database"
 	"github.com/ipbproject/IPB-Vote/src/routes"
 )
 
 func main() {
+	database.ConectaBancoDeDados()
 	routes.HanleRequest()
-	http.ListenAndServe(":8000", nil)
 }
