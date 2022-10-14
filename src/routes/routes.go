@@ -5,8 +5,11 @@ import (
 	"github.com/ipbproject/IPB-Vote/src/controllers"
 )
 
-func HanleRequest() {
+func HandleRequest() {
 	r := gin.Default()
 	r.POST("/insert", controllers.Insert)
+	r.GET("/get", controllers.Get)
+	r.PUT("/update", controllers.Update)
+	r.DELETE("/delete", controllers.Delete)
 	r.Run()
 }
