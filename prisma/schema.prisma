@@ -12,7 +12,9 @@ datasource db {
 
 model Vote {
   id        String   @id
-  role      String
+  roleId    String
   vote      String
   createdAt DateTime @default(now())
+
+  @@index([roleId])
 }
